@@ -11,6 +11,9 @@
     <OutputPath>.</OutputPath>
     <Name>AzureChinaCDNPurge</Name>
     <RootNamespace>AzureChinaCDNPurge</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>"4fa5c6b1-7b2e-4e6c-806f-b4f97ddf2a1e" "71282874-c539-11e8-be87-0017fa000909" "http://www.forwardx.com/" "e5d06535-83e0-4f6d-9bca-3a9b63bb7abe" "MjdlZWU5ZmMtNTBiNS00NTAyLWFkZmUtNTMyMjQ4NzRmZjM2"</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
