@@ -1,3 +1,9 @@
+'''
+    File name: AzureChinaCDNPurge.py
+    Author: Afa Cheng <afa@afa.moe>
+    License: MIT
+'''
+
 import urllib
 import argparse
 import json
@@ -24,7 +30,7 @@ def post_purge(path, subscriptionId, endpointId, keyId, keyValue):
     authHdr = calculate_authorization_header(url, datestr, keyId, keyValue, 'POST')
     headers = { 'content-type': 'application/json', 'x-azurecdn-request-date': datestr, 'Authorization': authHdr }
     req = Request(url, headers=headers, data=data)
-    
+
     try:
         resp = urlopen(req)
         print('Purging submitted')
@@ -56,5 +62,5 @@ def main():
         sys.exit(0)
     else:
         sys.exit(1)
-    
+
 main()
