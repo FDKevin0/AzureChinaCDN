@@ -1,27 +1,11 @@
-'''
-    File name: AzureChinaCDNPurge.py
-    Author: Afa Cheng <afa@afa.moe>
-    License: MIT
-'''
-
-import urllib
 import argparse
 import json
-import hmac
-import hashlib
 import sys
 from urllib.error import URLError, HTTPError
 from urllib.request import Request, urlopen
-from collections import OrderedDict
 from datetime import datetime
+from request import calculate_authorization_header
 
-def calculate_authorization_header(request_url, request_time, key_id, key_value, http_method):
-    urlparts = urllib.parse.urlparse(request_url)
-    queries = urllib.parse.parse_qs(urlparts.query)
-    ordered_queries = OrderedDict(sorted(queries.items()))
-    message = "%s\r\n%s\r\n%s\r\n%s" % (urlparts.path, ", ".join(['%s:%s' % (key, value[0]) for (key, value) in ordered_queries.items()]), request_time, http_method)
-    digest = hmac.new(bytearray(key_value, "utf-8"), bytearray(message, "utf-8"), hashlib.sha256).hexdigest().upper()
-    return "AzureCDN %s:%s" % (key_id, digest)
 
 def post_purge(path, subscriptionId, endpointId, keyId, keyValue):
     url = f'https://restapi.cdn.azure.cn/subscriptions/{subscriptionId}/endpoints/{endpointId}/purges?apiVersion=1.0'
